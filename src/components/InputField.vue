@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Eye from './icons/Eye.vue'
-import EyeSlash from './icons/EyeSlash.vue'
+import EyeIcon from './icons/EyeIcon.vue'
+import EyeSlashIcon from './icons/EyeSlashIcon.vue'
 
 const props = withDefaults(defineProps<{ type?: 'text' | 'password'; label?: string }>(), {
   type: 'text',
@@ -36,10 +36,10 @@ const kind = ref(props.type)
     <button
       type="button"
       v-if="type === 'password'"
-      class="absolute right-0 px-2.5 rounded-r-sm h-full"
+      class="absolute right-0 px-2.5 rounded-r-sm h-full cursor-pointer"
     >
-      <Eye class="w-6" @click="kind = 'text'" v-if="kind === 'password'" />
-      <EyeSlash class="w-6" @click="kind = 'password'" v-else />
+      <EyeIcon class="w-6" @click="kind = 'text'" v-if="kind === 'password'" />
+      <EyeSlashIcon class="w-6" @click="kind = 'password'" v-else />
     </button>
   </div>
 </template>
