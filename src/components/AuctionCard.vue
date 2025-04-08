@@ -69,9 +69,10 @@ defineProps<{ auction: Auction }>()
       <div class="text-2xl bg-gray-50 p-2 font-semibold w-fit rounded-sm">
         <p>
           {{
-            Intl.NumberFormat('en-US', {
+            Intl.NumberFormat('id-ID', {
               style: 'currency',
-              currency: 'USD',
+              currency: 'IDR',
+              maximumFractionDigits: 0,
             }).format(auction.biddings[0]?.amount ?? auction.minimumBid)
           }}
         </p>

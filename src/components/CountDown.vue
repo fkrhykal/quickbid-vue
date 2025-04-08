@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 
 const props = defineProps<{ end: number }>()
 const days = ref(0)
@@ -24,11 +24,13 @@ const refreshCountdown = () => {
   seconds.value = Math.floor((diff % (1000 * 60)) / 1000)
 }
 
+const interval = ref<ReturnType<typeof setInterval>>()
+
 onMounted(() => {
-  const interval = setInterval(refreshCountdown, 1_000)
-  return () => {
-    clearInterval(interval)
-  }
+  interval.value = setInterval(refreshCountdown, 1_000)
+})
+onUnmounted(() => {
+  clearInterval(interval.value)
 })
 </script>
 
@@ -37,30 +39,22 @@ onMounted(() => {
     <div
       class="p-1 bg-slate-100 aspect-square grid place-items-center size-[3rem] text-center font-bold text-lg rounded-sm"
     >
-      <p>
-        {{ padStart(days, 3) }}
-      </p>
+      <p>{{ padStart(days, 3) }}</p>
     </div>
     <div
       class="p-1 bg-slate-100 aspect-square size-[3rem] grid place-items-center text-center font-bold text-lg rounded-sm"
     >
-      <p>
-        {{ padStart(hours) }}
-      </p>
+      <p>{{ padStart(hours) }}</p>
     </div>
     <div
       class="p-1 bg-slate-100 aspect-square size-[3rem] grid place-items-center text-center font-bold text-lg rounded-sm"
     >
-      <p>
-        {{ padStart(minutes) }}
-      </p>
+      <p>{{ padStart(minutes) }}</p>
     </div>
     <div
       class="p-1 bg-slate-100 aspect-square size-[3rem] grid place-items-center text-center font-bold text-lg rounded-sm"
     >
-      <p>
-        {{ padStart(seconds) }}
-      </p>
+      <p>{{ padStart(seconds) }}</p>
     </div>
   </div>
 </template>
