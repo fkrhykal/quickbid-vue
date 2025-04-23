@@ -34,6 +34,7 @@ export type Auction = {
 </script>
 
 <script setup lang="ts">
+import AvatarImage from './AvatarImage.vue'
 import CountDown from './CountDown.vue'
 
 defineProps<{ auction: Auction }>()
@@ -45,9 +46,11 @@ defineProps<{ auction: Auction }>()
       <div
         class="shape absolute top-1 right-1 bg-gray-100/70 hover:bg-gray-100 transition-all py-1 pl-1 pr-4 flex items-center gap-x-2"
       >
-        <div class="aspect-square flex rounded-full w-[2rem]">
-          <img class="object-fit rounded-full" :src="auction.lister.avatar" alt="" />
-        </div>
+        <AvatarImage
+          class="w-[2rem]"
+          :image="auction.lister.avatar"
+          :initial="auction.lister.username[0]"
+        />
         <div>
           <p class="text-sm font-semibold">{{ auction.lister.username }}</p>
         </div>
@@ -82,21 +85,19 @@ defineProps<{ auction: Auction }>()
           <li
             v-for="(bidding, i) in auction.biddings.slice(0, 4)"
             :key="bidding.id"
-            class="-ml-2 size-8 first:size-10"
+            class="-ml-2 size-7 md:size-6 xl:size-7 first:size-8 xl:first:size-9"
             :style="{
               'z-index': `${auction.biddings.length - i}`,
             }"
           >
-            <div class="rounded-full bg-gray-200">
-              <img class="rounded-full size-full" :src="bidding.bidder.avatar" alt="" />
-            </div>
+            <AvatarImage :image="bidding.bidder.avatar" :initial="bidding.bidder.username[0]" />
           </li>
-          <div
+          <li
             v-if="auction.biddings.length > 4"
-            class="size-8 text-xs grid place-items-center bg-gray-200 -ml-2 rounded-full font-semibold"
+            class="size-7 md:size-6 xl:size-7 text-xs grid place-items-center bg-gray-200 -ml-2 rounded-full font-semibold"
           >
             <p>+{{ auction.biddings.length - 4 }}</p>
-          </div>
+          </li>
         </ul>
       </div>
     </div>

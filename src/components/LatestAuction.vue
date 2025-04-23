@@ -7,7 +7,7 @@ const auctions: Auction[] = Array(10)
   .map(() => ({
     biddings: Array(10)
       .fill(undefined)
-      .map<Auction['biddings'][0]>(() => ({
+      .map<Auction['biddings'][number]>(() => ({
         id: faker.string.uuid(),
         amount: faker.number.int({ min: 10_000, max: 10_000 }),
         bidder: {
