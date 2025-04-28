@@ -1,5 +1,6 @@
-import type { Fail, Handler, Ok } from '@/hooks/form'
-import { api, handleError } from './utils'
+import { api } from '@/handler'
+import type { Fail, FormHandler, Ok } from '@/hooks/form'
+import { handleError } from './utils'
 
 export type SignUpPayload = {
   username: string
@@ -15,7 +16,7 @@ export type SignUpFailure = Fail<
   | { code: 0; error: unknown }
 >
 
-export const signUp: Handler<SignUpPayload, SignUpSuccess, SignUpFailure> = async (payload) => {
+export const signUp: FormHandler<SignUpPayload, SignUpSuccess, SignUpFailure> = async (payload) => {
   return handleError(async () => {
     const res = await fetch(api('/sign-up'), {
       method: 'POST',

@@ -104,7 +104,7 @@ defineProps<{ auction: Auction }>()
   </div>
 </template>
 
-<style lang="postcss" scoped>
+<style scoped>
 .shape {
   border-radius: 120px 15px 15px 120px;
 }

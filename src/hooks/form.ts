@@ -6,7 +6,7 @@ export type Fail<E> = { ok: false } & E
 
 export type Ok<D> = { ok: true } & D
 
-export type Handler<T, D, E> = (args: T) => Promise<Ok<D> | Fail<E>>
+export type FormHandler<T, D, E> = (args: T) => Promise<Ok<D> | Fail<E>>
 
 export type Field = string | number
 
@@ -23,7 +23,7 @@ export type Errors<T> = Optional<T> & Record<string, string | undefined>
 export function useForm<T extends Payload, D, E>(
   defaultValue: T,
   options: {
-    handler: Handler<T, D, E>
+    handler: FormHandler<T, D, E>
     onSuccess: (success: D) => MaybePromise<void>
     onFailure: (fail: E) => MaybePromise<void>
   },

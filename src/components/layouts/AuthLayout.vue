@@ -2,7 +2,7 @@
 import Upside from '@/components/icons/UpsideGradientLogo.vue'
 import { useAuthStore } from '@/stores/auth'
 import { onBeforeMount } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -17,7 +17,9 @@ onBeforeMount(() => {
 <template>
   <main class="grid xl:grid-cols-2 min-h-screen">
     <section class="bg-gradient-to-bl from-black to-gray-800 hidden py-2 px-4 xl:grid">
-      <Upside class="w-[8rem]" />
+      <RouterLink to="/">
+        <Upside class="w-[8rem]" />
+      </RouterLink>
     </section>
     <section class="flex justify-center md:items-center md:p-6">
       <slot></slot>
