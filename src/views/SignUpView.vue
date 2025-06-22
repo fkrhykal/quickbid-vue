@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ErrorField from '@/components/ErrorField.vue'
 import LoaderCircleIcon from '@/components/icons/LoaderCircleIcon.vue'
+import UpsideIcon from '@/components/icons/QuickbidIcon.vue'
 import InputField from '@/components/InputField.vue'
 import AuthLayout from '@/components/layouts/AuthLayout.vue'
 import { signUp } from '@/handler/form/sign-up'
@@ -37,11 +38,16 @@ const { username, password, isLoading, errors, submit, setError, clearError } = 
 <template>
   <AuthLayout>
     <div
-      class="md:border space-y-8 border-gray-200 md:shadow-xl rounded-md px-6 md:px-12 pt-8 pb-12 w-full max-w-[27rem]"
+      class="md:border space-y-6 border-gray-200 md:shadow-xl rounded-md px-6 md:px-12 pt-8 pb-12 w-full max-w-[28rem]"
     >
-      <div class="space-y-1">
-        <h2 class="text-xl font-semibold text-gray-800">Create your Account</h2>
-        <p class="text-gray-600 text-sm">It's quick and easy.</p>
+      <div class="space-y-1 flex gap-x-4">
+        <RouterLink class="lg:hidden" to="/">
+          <UpsideIcon class="w-12 h-min" />
+        </RouterLink>
+        <div class="mt-auto">
+          <h2 class="text-2xl font-semibold text-gray-800">Create your Account</h2>
+          <p class="text-gray-600">Its quick and easy.</p>
+        </div>
       </div>
 
       <form @submit.prevent="submit" class="grid gap-y-4">
@@ -60,13 +66,13 @@ const { username, password, isLoading, errors, submit, setError, clearError } = 
         </div>
         <button
           :disabled="isLoading"
-          class="py-2 grid place-items-center hover:bg-gray-800 disabled:bg-gray-700 disabled:cursor-not-allowed transition-all bg-gray-950 text-white font-semibold rounded-sm mt-4"
+          class="py-3 grid place-items-center hover:bg-gray-800 disabled:bg-gray-700 disabled:cursor-not-allowed transition-all bg-gray-950 text-white font-semibold rounded-sm mt-4"
         >
           <LoaderCircleIcon class="animate-spin" v-if="isLoading" />
           <span v-else> Sign up </span>
         </button>
       </form>
-      <p class="text-center text-sm text-gray-600">
+      <p class="text-center text-gray-600">
         Already have an account?
         <RouterLink to="/sign-in" class="font-semibold text-gray-950 hover:underline ml-0.5"
           >Sign in</RouterLink

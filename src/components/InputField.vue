@@ -17,18 +17,18 @@ const kind = ref(props.type)
 </script>
 
 <template>
-  <div class="relative group">
+  <div class="relative">
     <label
       v-if="label"
-      class="absolute pointer-events-none group-hover:-translate-y-[125%] top-[30%] ml-2 text-sm text-gray-600 font-gray-900 bg-white px-1 transition-all"
+      class="absolute pointer-events-none top-[30%] ml-2 text-gray-600 font-gray-900 bg-white px-1 transition-all"
       for=""
-      :class="{ '-translate-y-[125%]': active }"
+      :class="{ '-translate-y-[130%] text-sm': active }"
       >{{ label }}</label
     >
     <input
       @focus="focus = true"
       @blur="focus = false"
-      class="border w-full rounded-sm border-gray-200 pt-3.5 pb-3 px-2"
+      class="border w-full rounded-sm focus:outline-none focus:ring-4 focus:ring-slate-100 border-gray-300 py-4 px-3"
       :class="{ 'pr-12': type === 'password' }"
       v-model="model"
       :type="kind"

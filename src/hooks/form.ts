@@ -14,11 +14,15 @@ export type Payload = Record<string, Field>
 
 export type MaybePromise<T> = Promise<T> | T
 
+<<<<<<< HEAD
 export type Optional<T> = {
   [K in keyof T]?: string | undefined
 }
 
 export type Errors<T> = Optional<T> & Record<string, string | undefined>
+=======
+export type Errors<T> = Partial<T> & Record<string, string | undefined>
+>>>>>>> 2239e4a (change upside to quickbid)
 
 export function useForm<T extends Payload, D, E>(
   defaultValue: T,

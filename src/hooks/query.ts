@@ -11,10 +11,8 @@ export type QueryHandler<Data, D extends { data: Data }, E> = (
 
 export function useQuery<D extends { data: Data }, Data, E>(opt: {
   queryFn: QueryHandler<Data, D, E>
-
   onFailure?: (error: E) => MaybePromise<void>
   onSuccess?: (data: D) => MaybePromise<void>
-  run?: boolean
 }) {
   const isLoading = ref(false)
   const data = ref<Data>()
