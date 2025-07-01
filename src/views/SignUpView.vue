@@ -7,7 +7,7 @@ import AuthLayout from '@/components/layouts/AuthLayout.vue'
 import { signUp } from '@/handler/form/sign-up'
 import { useForm } from '@/hooks/form'
 import { useToast } from '@/hooks/toast'
-import { isTypeError } from '@/utils/guard'
+import { isTypeError } from '@/lib/guard'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -19,7 +19,7 @@ const { username, password, isLoading, errors, submit, setError, clearError } = 
     password: '',
   },
   {
-    handler: signUp,
+    formFn: signUp,
     onFailure(result) {
       if (result.code === 409) {
         setError('username', result.error)

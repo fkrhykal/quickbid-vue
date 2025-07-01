@@ -5,9 +5,9 @@ defineProps<{ message: string }>()
 
 <template>
   <div
-    class="px-1 flex gap-x-1 items-center w-fit py-1 rounded-sm bg-gray-100 border border-gray-200 mt-1"
+    class="p-1 flex gap-x-1 mt-1 items-center w-fit rounded-sm bg-gray-100 border border-gray-200"
   >
     <WarnIcon class="size-4" />
-    <p class="text-xs text-gray-500 first-letter:capitalize">{{ message }}</p>
+    <p class="text-sm text-gray-500 first-letter:capitalize">{{ message }}</p>
   </div>
 </template>

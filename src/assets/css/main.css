@@ -2,5 +2,5 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: Urbanist, sans-serif;
+  --font-sans: Urbanist, Roboto, sans-serif;
 }

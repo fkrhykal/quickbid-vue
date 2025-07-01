@@ -4,11 +4,11 @@ import LoaderCircle from '@/components/icons/LoaderCircleIcon.vue'
 import UpsideIcon from '@/components/icons/QuickbidIcon.vue'
 import InputField from '@/components/InputField.vue'
 import AuthLayout from '@/components/layouts/AuthLayout.vue'
-import { signIn } from '@/handler/form/sign-in'
+import { createAccessToken } from '@/data/form/sign-in'
 import { useForm } from '@/hooks/form'
 import { useToast } from '@/hooks/toast'
+import { isTypeError } from '@/lib/guard'
 import { useAuthStore } from '@/stores/auth'
-import { isTypeError } from '@/utils/guard'
 import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()
@@ -18,18 +18,21 @@ const toast = useToast()
 const { username, password, isLoading, submit, errors, setError } = useForm(
   { username: '', password: '' },
   {
-    handler: signIn,
-    onFailure(result) {
-      if (result.code === 401) {
+    formFn: createAccessToken,
+    onFailure({ code, error }) {
+      if (code === 401) {
         setError('auth', 'Incorrect username or password')
         return
       }
-      if (result.code === 0 && isTypeError(result.error)) {
-        toast.error(result.error.message)
+      if (code === 0 && isTypeError(error)) {
+        toast.error(error.message)
       }
     },
-    onSuccess(result) {
-      auth.setToken(result.data.bearerToken)
+    onSuccess({ data: { accessToken, refreshToken } }) {
+      auth.init({
+        accessToken,
+        refreshToken,
+      })
       router.push('/')
     },
   },
@@ -53,12 +56,8 @@ const { username, password, isLoading, submit, errors, setError } = useForm(
 
       <form @submit.prevent="submit" class="grid gap-y-4">
         <ErrorField v-if="errors.auth" :message="errors.auth" />
-        <div>
-          <InputField label="Username" v-model="username" />
-        </div>
-        <div>
-          <InputField type="password" label="Password" v-model="password" />
-        </div>
+        <InputField label="Username" v-model="username" />
+        <InputField type="password" label="Password" v-model="password" />
         <button
           :disabled="isLoading"
           class="py-3 grid place-items-center hover:bg-gray-800 disabled:bg-gray-700 disabled:cursor-not-allowed transition-all bg-gray-950 text-white font-semibold rounded-sm mt-4"

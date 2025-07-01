@@ -5,8 +5,8 @@ import { createApp, type Directive, type GlobalDirectives } from 'vue'
 
 import App from './App.vue'
 import type { MaybePromise } from './hooks/form'
+import { isNode } from './lib/guard'
 import router from './router'
-import { isNode } from './utils/guard'
 
 declare module 'vue' {
   export interface GlobalDirectives {

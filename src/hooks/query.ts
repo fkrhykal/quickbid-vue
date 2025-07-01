@@ -1,21 +1,15 @@
 import { onMounted, onUnmounted, ref } from 'vue'
-import type { MaybePromise } from './form'
+import type { Fail, MaybePromise, Ok } from './response'
 
-export type Fail<E> = { ok: false } & E
+export type QueryFn<D, S, F> = (signal: AbortSignal) => Promise<Ok<S & { data: D }> | Fail<F>>
 
-export type Ok<D extends { data: Data }, Data> = { ok: true } & D
-
-export type QueryHandler<Data, D extends { data: Data }, E> = (
-  signal: AbortSignal,
-) => Promise<Ok<D, Data> | Fail<E>>
-
-export function useQuery<D extends { data: Data }, Data, E>(opt: {
-  queryFn: QueryHandler<Data, D, E>
-  onFailure?: (error: E) => MaybePromise<void>
-  onSuccess?: (data: D) => MaybePromise<void>
+export function useQuery<D, S, F>(opt: {
+  queryFn: QueryFn<D, S, F>
+  onFailure?: (failure: Fail<F>) => MaybePromise<void>
+  onSuccess?: (success: Ok<S>) => MaybePromise<void>
 }) {
   const isLoading = ref(false)
-  const data = ref<Data>()
+  const data = ref<D>()
   const controller = new AbortController()
 
   onMounted(async () => {

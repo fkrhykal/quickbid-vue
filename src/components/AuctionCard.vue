@@ -44,13 +44,11 @@ defineProps<{ auction: Auction }>()
   <div class="border rounded-sm border-gray-300 p-2">
     <div class="relative">
       <div
-        class="shape absolute top-1 right-1 bg-gray-100/70 hover:bg-gray-100 transition-all py-1 pl-1 pr-4 flex items-center gap-x-2"
+        class="profile-badge absolute top-1 right-1 bg-gray-100/70 hover:bg-gray-100 transition-all py-1 pl-1 pr-4 flex items-center gap-x-2"
       >
-        <AvatarImage
-          class="w-[2rem]"
-          :image="auction.lister.avatar"
-          :initial="auction.lister.username[0]"
-        />
+        <div class="size-6">
+          <AvatarImage :initial="auction.lister.username[0]" />
+        </div>
         <div>
           <p class="text-sm font-semibold">{{ auction.lister.username }}</p>
         </div>
@@ -90,7 +88,7 @@ defineProps<{ auction: Auction }>()
               'z-index': `${auction.biddings.length - i}`,
             }"
           >
-            <AvatarImage :image="bidding.bidder.avatar" :initial="bidding.bidder.username[0]" />
+            <AvatarImage :initial="bidding.bidder.username[0]" />
           </li>
           <li
             v-if="auction.biddings.length > 4"
@@ -105,7 +103,7 @@ defineProps<{ auction: Auction }>()
 </template>
 
 <style scoped>
-.shape {
+.profile-badge {
   border-radius: 120px 15px 15px 120px;
 }
 </style>

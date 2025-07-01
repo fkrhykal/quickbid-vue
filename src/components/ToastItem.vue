@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { ToastOptions } from '@/stores/toast'
+import type { ToastOption } from '@/stores/toast'
 import WarnIcon from './icons/WarnIcon.vue'
 
-defineProps<{ toast: ToastOptions }>()
+defineProps<{ toast: ToastOption }>()
 </script>
 
 <template>

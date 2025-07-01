@@ -1,9 +1,5 @@
 <script setup lang="ts">
-<<<<<<< HEAD
-import UpsideIcon from '@/components/icons/UpsideIcon.vue'
-=======
 import UpsideIcon from '@/components/icons/QuickbidIcon.vue'
->>>>>>> 2239e4a (change upside to quickbid)
 import LatestAuction from '@/components/LatestAuction.vue'
 import ProfileDetail from '@/components/ProfileDetail.vue'
 import SearchBar from '@/components/SearchBar.vue'
@@ -13,15 +9,11 @@ const auth = useAuthStore()
 </script>
 
 <template>
-<<<<<<< HEAD
-  <header class="p-3 shadow-lg shadow-gray-100/10 bg-gray-950 text-white">
-=======
   <header class="py-3 shadow-lg shadow-gray-100/10 bg-gray-950 text-white">
->>>>>>> 2239e4a (change upside to quickbid)
     <div class="container mx-auto px-3 flex justify-between items-center">
       <UpsideIcon class="h-[2.5rem] w-fit" />
       <div>
-        <RouterLink v-if="auth.bearerToken == null" to="/sign-in">
+        <RouterLink v-if="!auth.isAccessTokenValid" to="/sign-in">
           <button class="bg-white text-slate-950 font-semibold px-4 py-2 rounded-sm">Login</button>
         </RouterLink>
         <ProfileDetail v-else />
